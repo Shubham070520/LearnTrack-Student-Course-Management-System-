@@ -17,9 +17,18 @@ public class Enrollment {
         this.status = EnrollmentStatus.ACTIVE;
     }
 
-    public int getStudentId() { return studentId; }
-    public int getCourseId() { return courseId; }
-    public EnrollmentStatus getStatus() { return status; }
+    public int getId() {
+        return id;
+    }
+    public int getStudentId() {
+        return studentId;
+    }
+    public int getCourseId() {
+        return courseId;
+    }
+    public EnrollmentStatus getStatus() {
+        return status;
+    }
 
     public void setStatus(EnrollmentStatus status) {
         this.status = status;
