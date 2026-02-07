@@ -6,6 +6,7 @@ import com.airtribe.learntrack.exception.EntityNotFoundException;
 import com.airtribe.learntrack.repository.EnrollmentRepository;
 import com.airtribe.learntrack.util.IdGenerator;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class EnrollmentService {
 
     public void enrollStudent(int studentId, int courseId) {
         int id = IdGenerator.getNextEnrollmentId();
-        Enrollment enrollment = new Enrollment(id, studentId, courseId, "2026-02-07");
+        Enrollment enrollment = new Enrollment(id, studentId, courseId, LocalDate.now());
         repository.save(enrollment);
     }
 
