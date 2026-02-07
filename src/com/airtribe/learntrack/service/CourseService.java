@@ -4,26 +4,34 @@ import java.util.ArrayList;
 
 import com.airtribe.learntrack.entity.Course;
 import com.airtribe.learntrack.exception.EntityNotFoundException;
+import com.airtribe.learntrack.repository.CourseRepository;
 import com.airtribe.learntrack.util.IdGenerator;
+import java.util.List;
 
 public class CourseService {
 
-    private ArrayList<Course> courses = new ArrayList<>();
+    private CourseRepository repository = new CourseRepository();
 
-    public void addCourse(String name, String desc, int weeks) {
+    public void addCourse(String name, String description, int durationInWeeks) {
         int id = IdGenerator.getNextCourseId();
-        courses.add(new Course(id, name, desc, weeks));
+        Course course = new Course(id, name, description, durationInWeeks);
+        repository.save(course);
     }
 
-    public ArrayList<Course> listCourses() {
-        return courses;
+    public List<Course> getAllCourses() {
+        return repository.findAll();
     }
 
-    public Course findById(int id) {
-        for(Course c : courses) {
-            if(c.getId() == id)
-                return c;
+    public Course findCourseById(int id) {
+        Course course = repository.findById(id);
+        if (course == null) {
+            throw new EntityNotFoundException("Course not found with id: " + id);
         }
-        throw new EntityNotFoundException("Course not found");
+        return course;
+    }
+
+    public void toggleCourseActive(int id) {
+        Course course = findCourseById(id);
+        course.setActive(!course.isActive());
     }
 }
