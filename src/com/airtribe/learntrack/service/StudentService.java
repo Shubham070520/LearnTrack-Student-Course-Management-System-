@@ -32,4 +32,12 @@ public class StudentService {
         }
         return student;
     }
+
+    public void deactivateStudent(int id) {
+        Student student = repository.findById(id);
+        if (student == null) {
+            throw new EntityNotFoundException("Student not found with id: " + id);
+        }
+        student.setActive(false);
+    }
 }
