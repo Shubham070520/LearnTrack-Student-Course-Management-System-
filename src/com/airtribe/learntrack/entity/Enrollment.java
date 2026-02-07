@@ -29,7 +29,6 @@ public class Enrollment {
     public EnrollmentStatus getStatus() {
         return status;
     }
-
     public void setStatus(EnrollmentStatus status) {
         this.status = status;
     }
